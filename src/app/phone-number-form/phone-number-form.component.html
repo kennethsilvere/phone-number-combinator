@@ -1,0 +1,38 @@
+<div *ngIf="!formSubmitted" class="row mt-5">
+  <div class="col-12">
+    <div class="card mx-auto">
+      <div class="card-body">
+        <h5 class="card-title">Enter a phone number to get combinations</h5>
+        <form
+          (ngSubmit)="getCombinations()">
+          <div class="form-group my-5">
+            <input
+              type="tel"
+              class="form-control"
+              id="phoneNumberInput"
+              placeholder="Phone number"
+              (keyup)="validateNumber($event)"
+              maxlength="12"
+              name="phoneNumber"
+              ngModel
+              #phoneNumberInput="ngModel"/>
+            <small class="form-text text-danger mt-3" *ngIf="showSpecialCharactersError">Only numbers and alphabets allowed</small>
+            <small class="form-text text-danger mt-3" *ngIf="(phoneNumberInput.control.touched && phoneNumberInput.control.dirty) && !validPhoneNumberLength">Phone number can be either 7 or 10 characters</small>
+          </div>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="showSpecialCharactersError || !validPhoneNumberLength">
+            Get combinations
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="formSubmitted" class="text-center vertically-center">
+    <div class="spinner-border" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+</div>
