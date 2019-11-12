@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
+import { CombinationService } from '../services/combination.service';
 
 @Component({
   selector: "app-phone-number-form",
@@ -11,13 +12,22 @@ export class PhoneNumberFormComponent implements OnInit {
   validPhoneNumberLength = false;
   formSubmitted = false;
 
-  constructor() {}
+  constructor(private cs: CombinationService) {}
 
   ngOnInit() {}
 
   getCombinations() {
     this.formSubmitted = true;
-    setTimeout(() => this.formSubmitted = false, 3000);
+    if(this.formSubmitted == true) {
+      let phoneNumber: string = this.phoneNumberInput.control.value;
+      phoneNumber = phoneNumber.replace(/\-/g, '');
+      // console.log(`phone number is: ${phoneNumber}`)
+      const phoneNumberArray: string[] = phoneNumber.split("");
+      this.cs.getCombinations(phoneNumberArray).subscribe(data => {
+        this.formSubmitted = false;
+        // console.log(data);               
+      });
+    }    
   }
 
   validateNumber(event) {
