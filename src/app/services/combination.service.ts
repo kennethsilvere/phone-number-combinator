@@ -8,8 +8,6 @@ export class CombinationService {
   constructor(private http: HttpClient) {}
 
   getCombinations(phoneNumberArray) {
-    // console.log('sending request to backend');
-    // console.log({phoneNumberArray});
     return this.http.post('http://localhost:3000/', phoneNumberArray);
   }
 

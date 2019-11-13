@@ -51,8 +51,18 @@ function getCombinations(sa) {
 
 
 app.post('/', (req, res) => {
-    getCombinations(req.body);
-    res.send(combinationsResult);
+
+  if (req.body['phoneNumber'] !== undefined) {
+    getCombinations(req.body.phoneNumber);
+  }
+  const page = req.body.pageNumber;
+  const pageSize = 10
+  const combinationsToBeSent = combinationsResult.slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize);
+  res.send({
+    combinations: combinationsToBeSent,
+    totalCount: combinationsResult.length,
+    page
+  });
 });
 
 app.listen(3000, () => console.log('App listening on port 3000!'));

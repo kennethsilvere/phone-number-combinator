@@ -1,0 +1,39 @@
+<div class="row my-5">
+  <div class="col-12">
+    <button 
+    class="btn btn-primary"
+    (click)="newSearch()">New Search</button>
+  </div>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">
+        <span *ngIf="collectionSize"> {{ collectionSize }} Combinations found</span>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let combination of combinations; let i = index">
+      <td>
+        {{ combination }}
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+  <ngb-pagination
+    class="d-flex justify-content-center"
+    [collectionSize]="collectionSize"
+    [(page)]="page"
+    [pageSize]="pageSize"
+    (pageChange)="goToPage($event)"
+    [maxSize]="paginationMaxSize"
+    [rotate]="true"
+    [ellipses]="false"
+    [boundaryLinks]="true"
+    [size]="paginationSize">
+  </ngb-pagination>
+

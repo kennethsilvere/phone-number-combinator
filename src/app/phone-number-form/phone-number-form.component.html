@@ -1,4 +1,4 @@
-<div *ngIf="!formSubmitted" class="row mt-5">
+<div *ngIf="!formSubmitted && combinationsFromService == undefined" class="row mt-5">
   <div class="col-12">
     <div class="card mx-auto">
       <div class="card-body">
@@ -35,4 +35,13 @@
     <div class="spinner-border" role="status">
       <span class="sr-only">Loading...</span>
     </div>
+</div>
+
+<div *ngIf="!formSubmitted && combinationsFromService != undefined">
+  <app-combinations-view
+    [combinations]="combinationsFromService"
+    [collectionSize]="combinationsTotalCount"
+    [page]="combinationsViewPageNumber"
+    (goToTablePage)="getNewPageFromCombinations($event)"
+    (newSearchEvent)="doNewSearch()"></app-combinations-view>
 </div>

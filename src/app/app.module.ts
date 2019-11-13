@@ -8,12 +8,14 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { PhoneNumberFormComponent } from './phone-number-form/phone-number-form.component';
 import { CombinationService } from './services/combination.service';
+import { CombinationsViewComponent } from './combinations-view/combinations-view.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    PhoneNumberFormComponent
+    PhoneNumberFormComponent,
+    CombinationsViewComponent
   ],
   imports: [
     BrowserModule,
